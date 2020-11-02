@@ -26,7 +26,24 @@ access_token = auth_response_data['access_token']
 headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
-#Variables para acceder a los datos de los artistas
+
+BASE_URL = 'https://api.spotify.com/v1/'
+artistas_id = ['2ye2Wgw4gimLv2eAKyk1NB', '1zng9JZpblpk48IPceRWs8', '74ASZWbe4lXaubB36ztrGX','3fMbdgg4jU18AjLCKBhRSm','36QJpDe2go2KgaRleHCDTp', '5M52tdBnJaKSvOpJGz8mfZ',]
+artistas_id = ['36QJpDe2go2KgaRleHCDTp', '5M52tdBnJaKSvOpJGz8mfZ', '2ye2Wgw4gimLv2eAKyk1NB', '1zng9JZpblpk48IPceRWs8', '74ASZWbe4lXaubB36ztrGX','3fMbdgg4jU18AjLCKBhRSm' ]
+for artista_id in artistas_id:
+            r = requests.get(BASE_URL + 'artists/' + artista_id + '/top-tracks?market=ES' ,
+                             headers=headers,
+                             params={'include_groups': 'album', 'limit': 50})
+            data = requests.get(BASE_URL + 'artists/' + artista_id ,
+                             headers=headers,
+                             )
+
+
+artista_data=data.json()
+tracks_data=r.json()["tracks"]
+
+
+#Variables para acceder a los datos de los artistas que me entrega la api en forma de json cuando se hace la conexion
 nombres = []
 Tipo = []
 Uri=[]
