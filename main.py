@@ -51,6 +51,18 @@ Popularidad = []
 seguidores = []
 carga=[]
 Origen=[]
+#variables para acceder a los datos  necesarios de las canciones que me entrega la api en forma de json
+nombresTracks = []
+TipoTrack = []
+PopularidadTracks = []
+Artistas = []
+Fecha = []
+id = []
+urlTracks = []
+Album = []
+Generos = []
+cargaTrack = []
+OrigenTracks = []
 
 nombres.append(artista_data["name"])
 Tipo.append(artista_data['type'])
@@ -64,3 +76,25 @@ Origen.append(artista_data['href'])
 datosArtista = {'nombre': nombres,'Tipo':Tipo,'Uri':Uri,'popularidad':Popularidad,'seguidores':seguidores,'FechaCarga':carga,'Origen':Origen}
 artistas = pd.DataFrame(data=datosArtista)
 print(artistas)
+
+tracks=[]
+for track in tracks_data:
+
+                OrigenTracks.append(track['href'])
+                nombresTracks.append(track['name'])
+                TipoTrack.append(track['type'])
+                Artistas.append(track["artists"][0]["name"])
+                Album.append(track["album"]["name"])
+                PopularidadTracks.append(track["popularity"])
+                Fecha.append(track["album"]["release_date"])
+                id.append(track["id"])
+                Generos.append(artista_data["genres"])
+                urlTracks.append(track["uri"])
+                now = datetime.now()
+                cargaTrack.append(now.replace(tzinfo=timezone.utc).timestamp())
+                OrigenTracks.append(track['href'])
+
+datosCanciones = {'ID':id,'nombre': nombresTracks, 'Tipo': TipoTrack, 'Uri': urlTracks, 'popularidad': PopularidadTracks,'artista':Artistas,'FechaDeLanzamiento':Fecha,'Generos':Generos,'FechaCarga':cargaTrack}
+Tracks = pd.DataFrame(data=datosCanciones)
+
+print(Tracks)
