@@ -51,3 +51,16 @@ Popularidad = []
 seguidores = []
 carga=[]
 Origen=[]
+
+nombres.append(artista_data["name"])
+Tipo.append(artista_data['type'])
+Uri.append(artista_data['uri'])
+Popularidad.append(artista_data['popularity'])
+seguidores.append(artista_data['followers']['total'])
+now = datetime.now()
+carga.append(now.replace(tzinfo=timezone.utc).timestamp())
+Origen.append(artista_data['href'])
+
+datosArtista = {'nombre': nombres,'Tipo':Tipo,'Uri':Uri,'popularidad':Popularidad,'seguidores':seguidores,'FechaCarga':carga,'Origen':Origen}
+artistas = pd.DataFrame(data=datosArtista)
+print(artistas)
