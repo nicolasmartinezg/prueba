@@ -28,7 +28,16 @@ headers = {
 }
 
 BASE_URL = 'https://api.spotify.com/v1/'
-artistas_id = ['2ye2Wgw4gimLv2eAKyk1NB', '1zng9JZpblpk48IPceRWs8', '74ASZWbe4lXaubB36ztrGX','3fMbdgg4jU18AjLCKBhRSm','36QJpDe2go2KgaRleHCDTp', '5M52tdBnJaKSvOpJGz8mfZ',]
+
+#Variables para acceder a los datos de los artistas que me entrega la api en forma de json cuando se hace la conexion
+nombres = []
+Tipo = []
+Uri=[]
+Popularidad = []
+seguidores = []
+carga=[]
+Origen=[]
+
 artistas_id = ['36QJpDe2go2KgaRleHCDTp', '5M52tdBnJaKSvOpJGz8mfZ', '2ye2Wgw4gimLv2eAKyk1NB', '1zng9JZpblpk48IPceRWs8', '74ASZWbe4lXaubB36ztrGX','3fMbdgg4jU18AjLCKBhRSm' ]
 for artista_id in artistas_id:
             r = requests.get(BASE_URL + 'artists/' + artista_id + '/top-tracks?market=ES' ,
@@ -43,14 +52,7 @@ artista_data=data.json()
 tracks_data=r.json()["tracks"]
 
 
-#Variables para acceder a los datos de los artistas que me entrega la api en forma de json cuando se hace la conexion
-nombres = []
-Tipo = []
-Uri=[]
-Popularidad = []
-seguidores = []
-carga=[]
-Origen=[]
+
 #variables para acceder a los datos  necesarios de las canciones que me entrega la api en forma de json
 nombresTracks = []
 TipoTrack = []
@@ -98,3 +100,7 @@ datosCanciones = {'ID':id,'nombre': nombresTracks, 'Tipo': TipoTrack, 'Uri': url
 Tracks = pd.DataFrame(data=datosCanciones)
 
 print(Tracks)
+
+
+engine = create_engine('postgresql://postgres:nicolas05@127.0.0.1:5432/datawarehouse')
+artistas.to_sql('Artist', con=engine, index=False)
