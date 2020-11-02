@@ -26,3 +26,11 @@ access_token = auth_response_data['access_token']
 headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
+#Variables para acceder a los datos de los artistas
+nombres = []
+Tipo = []
+Uri=[]
+Popularidad = []
+seguidores = []
+carga=[]
+Origen=[]
